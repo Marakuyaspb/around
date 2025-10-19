@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+<section>
+	
+
+
+{% for latest_articles in articles %}
+
+<div class="carousel-item" data-bs-interval="3000">
+	<div class='last_articles'>
+
+		<img src="{{ latest_articles.img_article.url }}" class="d-block " alt="...">
+		<div class='carousel-caption'>
+			<h2>{{ latest_articles.title }}</h2>
+			<p class="">{{ latest_articles.first_sentence }}..</p>
+		</div>
+	</div>
+
+
+</div>
+
+{% empty %}
+
+<li>У статей выходной.</li>
+
+{% endfor %}
+
+</section>
+
+
+
+
+
+<section>
+	
+% for the_article in articles %}
+
+		<a href="{% url 'blog:the_article' id=the_article.article_id %}">
+			<div class="card pb-1" style="width: 20em;">
+				<img src="{{ the_article.img_article.url }}" class="card-img-top" alt="...">
+
+				<div class="card-body">
+					<h3 class="card-title blue_deep">{{ the_article.title }}</h3>
+					<p class="card-text my-3">{{ the_article.first_two_sentences }}..</p>
+
+					<center><a href="{% url 'blog:the_article' id=the_article.article_id %}" class="btn btn-success">Читать дальше</a></center>
+				</div>
+
+			</div>
+		</a>
+
+		{% endfor %}
+
+</section>
+
+
+{% endblock %}

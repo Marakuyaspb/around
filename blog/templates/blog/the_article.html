@@ -1,0 +1,149 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<style type="text/css">
+	
+</style>
+
+<div class='full_width'>
+
+<!-- Desctop -->
+	<div class='d-none d-lg-block d-xl-block d-xxl-block'>
+		<div class='row'>
+
+			<div class='col-md-4 mb-2'>
+
+			{% if the_article.img_article_1 %}
+				<div id="carouselExampleInterval" class="carousel slide mb-2" data-bs-ride="carousel">
+					<div class="carousel-inner">
+
+						<div class="carousel-item active" data-bs-interval="3000">
+							<img src="{{ the_article.img_article_1.url }}" class="d-block blog_carousel" alt="...">
+						</div>
+
+						{% if the_article.img_article_2 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_article_2.url }}" class="d-block blog_carousel" alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_article_3 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_article_3.url }}" class="d-block blog_carousel" alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_article_4 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_article_4.url }}" class="d-block " alt="...">
+							</div>
+						{% endif %}
+
+					</div>
+
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			{% endif %}
+
+			</div>
+			<div class='col-md-5 mb-2'>
+				<div class="px-5 mt-5 mb-52">
+					<h2 class='blue_deep'>{{ the_article.title }}</h2>
+					<p class='pt-2 pb-3 we_500'></p>
+					<p>{{ the_article.text|linebreaks }}</p>
+				</div>
+			</div>
+
+			<div class='col-md-3 blue_very_light_bg'>
+
+				<div class='big_fields_text p-2'>
+					<h4 class='my-5'>Другие статьи</h4>
+					{% for the_article in articles %}
+						<a clas='black_text' href="{% url 'blog:the_article' id=the_article.article_id %}"><p class='we_500 black_text'>{{ the_article.title }}</p></a>
+					{% endfor%}
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+
+<!-- Tablet % mobile -->
+	<div class='d-block d-lg-none'>
+
+		<div class='mb-2'>
+
+			{% if the_article.img_article_1 %}
+				<div id="carouselExampleInterval" class="carousel slide mb-2" data-bs-ride="carousel">
+					<div class="carousel-inner">
+
+						<div class="carousel-item active" data-bs-interval="3000">
+							<img src="{{ the_article.img_article_1.url }}" class="d-block blog_carousel" alt="...">
+						</div>
+
+						{% if the_article.img_article_2 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_article_2.url }}" class="d-block blog_carousel" alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_article_3 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_article_3.url }}" class="d-block blog_carousel" alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_article_4 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_article_4.url }}" class="d-block " alt="...">
+							</div>
+						{% endif %}
+
+					</div>
+
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			{% endif %}
+
+		</div>
+		<div class=' mb-2'>
+			<div class="px-5 mt-5 mb-52">
+				<h2 class='blue_deep'>{{ the_article.title }}</h2>
+				<p class='pt-2 pb-3 we_500'></p>
+				<p>{{ the_article.text|linebreaks }}</p>
+			</div>
+		</div>
+
+		<div class='blue_very_light_bg'>
+
+				<div class='big_fields_text p-2'>
+					<h4 class='my-5'>Другие статьи</h4>
+					{% for the_article in articles %}
+						<a clas='black_text' href="{% url 'blog:the_article' id=the_article.article_id %}"><p class='we_500 black_text'>{{ the_article.title }}</p></a>
+					{% endfor%}
+				</div>
+		</div>	
+	</div>
+
+</div> 
+
+{% endblock %}
