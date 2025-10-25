@@ -2,6 +2,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
 
+:root{
+  --black_absolute:rgb(0,0,0);
+  --black: rgb(29, 28, 28);
+  --gray_light: rgb(217, 217, 217);
+  --gray: rgb(119, 118, 118);
+  --indigo: rgb(58, 59, 115);
+  --lavender: rgb(223, 192, 190);
+  --orange: rgb(255, 200, 109);
+  --red: rgb(244, 88, 101);
+  --seagreen: rgb(151, 209, 195);
+  --white: rgb(255, 255, 255);
+  --white_warm: rgb(255, 245, 233);
+  --white_dirty: rgb(245, 245, 245);
+}
 
 html{
   margin: 0;
@@ -14,7 +28,7 @@ body {
   font-style: normal;
   font-optical-sizing: auto;
   padding: 0;
-  color: #1D1C1C;
+  color: var(--white);
 }
 
 h1, h2, h3, h4, h5 {
@@ -48,61 +62,104 @@ a {
 
  /* COLORS */ 
 
-.black{
-	color: #1D1C1C;
-}
 
+
+.black{
+	color: var(--black);
+}
+.black_absolute{
+  color: var(--black_absolute);
+}
+.gray_light{
+  color: var(--gray_light);
+}
+.gray{
+  color: var(--gray);
+}
 .indigo{
-	color: #3a3b73;
+	color: var(--indigo);
 }
 .lavender{
-	color: #dfc0be;
+	color: var(--lavender);
 }
 .orange {
-	color: #ffc86d;
+	color: var(--orange);
 }
-
 .red{
-	color: #f45865;
+	color: var(--red);
 }
 .seagreen{
-	color: #97d1c3;
+	color: var(--seagreen);
 }
 .white{
-	color: #FFF5E9;
+	color: var(--white);
 }
-
+.white_warm{
+	color: var(--white_warm);
+}
+.white_dirty{
+  color: var(--white_dirty);
+}
 
 
 .black_bg{
-	background-color: #1D1C1C;
+	background-color: var(--black);
 }
-
+.black_absolute_bg{
+  background-color: var(--black_absolute);
+}
+.gray_light_bg{
+  background-color: var(--gray_light);
+}
+.gray_bg{
+  background-color: var(--gray);
+}
 .indigo_bg{
-	background-color: #3a3b73;
+	background-color: var(--indigo);
 }
 .lavender_bg{
-	background-color: #dfc0be;
+	background-color: var(--lavender);
 }
 .orange_bg{
-	background-color: #ffc86d;
+	background-color: var(--orange);
 }
-
 .red_bg{
-	background-color: #f45865;
+	background-color: var(--red);
 }
 .seagreen_bg{
-	background-color: #97d1c3;
+	background-color: var(--seagreen);
 }
-
 .white_bg{
-	background-color: #FFF5E9;
+	background-color: var(--white);
+}
+.white_warm_bg{
+	background-color: var(--white_warm);
+}
+.white_dirty_bg{
+  background-color: var(--white_dirty);
 }
 
 
 
+.absolute{
+	position: absolute;
+}
+.relative{
+	position: relative;
+}
 
-
+.tl_radius{
+	border-top-left-radius: 3.6em;
+}
+.tr_radius{
+	border-top-right-radius: 3.6em;
+}
+.br_radius{
+	border-bottom-right-radius: 3.6em;
+}
+.bl_radius{
+	border-bottom-left-radius: 3.6em;
+}
 
 
 

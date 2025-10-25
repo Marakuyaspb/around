@@ -1,0 +1,75 @@
+{% load static %}
+
+{% block content %}
+
+<style>
+
+	.geometry_card{
+		width: 20em;
+		height: 20em;
+		overflow: hidden; 
+	}
+	.img_bg_card{
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: -1;
+	}
+	.br_radius{
+		bottom: 0;
+		left: 0;
+		height: 6em;
+		width: 10.3em;
+		display: flex;
+		align-items: center;
+		border-top: 5px solid var(--white);
+		border-right: 5px solid var(--white);
+		border-bottom: 5px solid var(--white);
+	}
+	.anti_circle{
+		top: 0;
+    	right: 0;
+		height: 16em;
+		width: 10em;
+		 -webkit-mask:
+        radial-gradient(ellipse 5em 5em at 50% calc(100% - 1em), transparent 100%, #000 0);          
+    	mask:
+        radial-gradient(ellipse 5em 5em at 50% calc(100% - 1em), transparent 100%, #000 0);
+        splay: flex;
+		align-items: flex-start;
+		border-left: 5px solid var(--white);
+	}
+	.circle{
+		bottom: 0;
+    	right: 0;
+    	z-index: 5;
+    	width: 10em;
+    	height: 10em;
+    	border-radius: 10em;
+		border: 5px solid var(--white);
+		background: transparent;
+	}
+
+</style>
+
+
+<section class="geometry_card tl_radius relative m-3">
+	<img class="img_bg_card" src="{% static 'img/banana_sea.jpeg' %}">
+
+	<div class="d-flex flex-row">
+		<div class="">
+			<div class="br_radius absolute indigo_bg white">
+				<center><p class='p-5'>Природа</p></center>
+			</div>
+			<div class="anti_circle absolute black_bg white">
+				<h4 class='p-4'>Бразилия</h2>
+			</div>
+			<div class="circle absolute">
+				
+		</div>
+	</div>
+</section>
+
+{% endblock %}
