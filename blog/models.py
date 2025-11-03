@@ -39,14 +39,16 @@ class Country(models.Model):
 
 class Place_name(models.Model):
 	place_name_id = models.AutoField(primary_key=True)
+	country = models.ForeignKey(Country,
+		on_delete=models.CASCADE, verbose_name = 'Страна')
 	place_name = models.CharField(max_length=60, verbose_name='Название места')
 	class Meta:
 		ordering = ['place_name']
 		indexes = [
 			models.Index(fields=['place_name']),
 		]
-		verbose_name = 'Страна'
-		verbose_name_plural = 'Страны'	
+		verbose_name = 'Место'
+		verbose_name_plural = 'Места'	
 
 	def __str__(self):
 		return self.place_name
@@ -77,8 +79,6 @@ class Article(models.Model):
 	article_id = models.AutoField(primary_key=True)
 	category = models.ForeignKey(Category,
 		on_delete=models.CASCADE, verbose_name = 'Категория')
-	country = models.ForeignKey(Country,
-		on_delete=models.CASCADE, verbose_name = 'Страна')
 	place_name = models.ForeignKey(Place_name,
 		on_delete=models.CASCADE, verbose_name = 'Название места')
 	title = models.CharField(verbose_name ='Заголовок', max_length=200)
@@ -111,6 +111,11 @@ class Article(models.Model):
 		verbose_name_plural = 'Статьи'
 
 
+	@property
+	def country(self):
+		return self.place_name.country
+
+
 	def __str__(self):
 		return f'Статья "{self.title}"'
 
@@ -122,7 +127,6 @@ class Article(models.Model):
 	def latest_10_articles(request):
 		latest_articles = Article.objects.order_by('-updated_at')[:10]
 		return render(request, 'latest_articles10.html', {'_articles10': _articles10})
-
 
 	def first_sentence(self):
 		sentences = self.text.split('. ')

@@ -1,11 +1,6 @@
-from django.shortcuts import render
-
-# Create your views here.
-
-
 import os
 from django.shortcuts import render, get_object_or_404
-from .models import Article, Tag
+from .models import *
 
 
 def articles(request):

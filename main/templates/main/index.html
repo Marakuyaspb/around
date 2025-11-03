@@ -6,8 +6,9 @@
 <img class='head_cover' src="{% static 'img/city_cut.jpeg' %}" >
 
 <section class="hero_block">
-  <h1 class='orange big_4 '>Мир за пределами столиц</h1>
-  <h2 class='pt-3 white'>Иди туда, где нет толп. Живи настоящую жизнь.</h2>
+  <h1 class='orange big_4 ps-2'>Мир за пределами столиц</h1>
+  <h2 class='pt-3 white'>Иди туда, где нет толп.
+  <br>Живи настоящую жизнь.</h2>
 </section>
 
 
@@ -21,9 +22,11 @@
 
 </section>
 
-
-{% include 'main/nice_grid.html' %}
-
 </div>
+
+<section class='d-flex justify-content-center'>
+{% include 'main/nice_grid.html' %}
+</section>
+
 
 {% endblock %}
