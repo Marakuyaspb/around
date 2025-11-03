@@ -16,29 +16,71 @@
 
 			<div class='col-md-4 mb-2'>
 
-			{% if the_article.img_article_1 %}
+			{% if the_article.img_prev %}
 				<div id="carouselExampleInterval" class="carousel slide mb-2" data-bs-ride="carousel">
 					<div class="carousel-inner">
 
 						<div class="carousel-item active" data-bs-interval="3000">
-							<img src="{{ the_article.img_article_1.url }}" class="d-block blog_carousel" alt="...">
+							<img src="{{the_article.img_prev.url}}" class="d-block blog_carousel" alt="...">
 						</div>
 
-						{% if the_article.img_article_2 %}
+						{% if the_article.img_1 %}
 							<div class="carousel-item" data-bs-interval="3000">
-								<img src="{{ the_article.img_article_2.url }}" class="d-block blog_carousel" alt="...">
+								<img src="{{ the_article.img_1.url }}" class="d-block blog_carousel" alt="...">
 							</div>
 						{% endif %}
 
-						{% if the_article.img_article_3 %}
+						{% if the_article.img_2 %}
 							<div class="carousel-item" data-bs-interval="3000">
-								<img src="{{ the_article.img_article_3.url }}" class="d-block blog_carousel" alt="...">
+								<img src="{{ the_article.img_2.url }}" class="d-block blog_carousel" alt="...">
 							</div>
 						{% endif %}
 
-						{% if the_article.img_article_4 %}
+						{% if the_article.img_3 %}
 							<div class="carousel-item" data-bs-interval="3000">
-								<img src="{{ the_article.img_article_4.url }}" class="d-block " alt="...">
+								<img src="{{ the_article.img_3.url }}" class="d-block " alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_4 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_4.url }}" class="d-block " alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_5 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_5.url }}" class="d-block " alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_6 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_6.url }}" class="d-block " alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_7 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_7.url }}" class="d-block " alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_8 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_8.url }}" class="d-block " alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_9 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_9.url }}" class="d-block " alt="...">
+							</div>
+						{% endif %}
+
+						{% if the_article.img_10 %}
+							<div class="carousel-item" data-bs-interval="3000">
+								<img src="{{ the_article.img_10.url }}" class="d-block " alt="...">
 							</div>
 						{% endif %}
 
