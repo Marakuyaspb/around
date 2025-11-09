@@ -9,7 +9,7 @@
 
  {% for article in page_obj %}
       <article>
-        <h4><a href="{% url 'the_article' article.article_id %}">
+        <h4><a href="{% url 'blog:the_article' article.article_id %}">
             {{ article.title }}</a></h4>
         <small>{{ article.created_at|date:"d.m.Y" }} / {{ article.category }}</small>
         <p >{{ article.text|truncatewords:30 }}</p>
