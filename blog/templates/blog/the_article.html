@@ -4,9 +4,7 @@
 
 {% block content %}
 
-<style type="text/css">
-	
-</style>
+
 
 <div class='full_width'>
 
@@ -100,14 +98,14 @@
 
 			</div>
 			<div class='col-md-5 mb-2'>
-				<div class="px-5 mt-5 mb-52">
-					<h2 class='blue_deep'>{{ the_article.title }}</h2>
+				<div class="px-5 mt-5 mb-2">
+					<h2 class='indigo'>{{ the_article.title }}</h2>
 					<p class='pt-2 pb-3 we_500'></p>
 					<p>{{ the_article.text|linebreaks }}</p>
 				</div>
 			</div>
 
-			<div class='col-md-3 blue_very_light_bg'>
+			<div class='col-md-3 lavender_bg'>
 
 				<div class='big_fields_text p-2'>
 					<h4 class='my-5'>Другие статьи</h4>
@@ -169,20 +167,20 @@
 		</div>
 		<div class=' mb-2'>
 			<div class="px-5 mt-5 mb-52">
-				<h2 class='blue_deep'>{{ the_article.title }}</h2>
+				<h2 class='indigo'>{{ the_article.title }}</h2>
 				<p class='pt-2 pb-3 we_500'></p>
 				<p>{{ the_article.text|linebreaks }}</p>
 			</div>
 		</div>
 
-		<div class='blue_very_light_bg'>
+		<div class='lavender_bg'>
 
-				<div class='big_fields_text p-2'>
-					<h4 class='my-5'>Другие статьи</h4>
-					{% for the_article in articles %}
-						<a clas='black_text' href="{% url 'blog:the_article' id=the_article.article_id %}"><p class='we_500 black_text'>{{ the_article.title }}</p></a>
-					{% endfor%}
-				</div>
+			<div class='big_fields_text p-2'>
+				<h4 class='my-5'>Другие статьи</h4>
+				{% for the_article in articles %}
+					<a clas='black_text' href="{% url 'blog:the_article' id=the_article.article_id %}"><p class='we_500 black_text'>{{ the_article.title }}</p></a>
+				{% endfor%}
+			</div>
 		</div>	
 	</div>
 

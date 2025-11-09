@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class='big_fields_text p-5 lavender black_bg'>
+
+	<div class="row">
+		<div class="col-md-6">
+			<img src="{{ the_newsstory.img_1.url }}" class="w-100" >
+		</div>
+		<div class="col-md-6">
+			<h1 class=''>{{ the_newsstory.title }}</h1>
+			<p class='pt-2 pb-3 we_500'></p>
+			<p>{{ the_newsstory.text|linebreaks }}</p>
+		</div>
+	</div>
+
+</div>
+
+
+{% endblock %}

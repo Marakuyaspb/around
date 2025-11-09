@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+<section class="grid-box">
+	
+{% for the_newsstory in news_list %}
+
+<div>
+	<a href="{% url 'news:the_newsstory' id=the_newsstory.article_id %}">
+		<img class="w-100" src="{{the_newsstory.img.url}}">
+
+		<p class='pt-3 ps-3 small'>{{ the_newsstory.country }}</p>
+		<h5 class='p-4'>{{ the_newsstory.country }}</h5>
+		<p class='px-4 pt-3 smaller'>{{ the_newsstory.place_name }}</p>
+	</a>
+
+	<div class="prev_text px-4">
+		<h5 class="black pb-2">{{ the_newsstory.title }}</h5>
+		<a href="{% url 'news:the_newsstory' id=the_newsstory.article_id %}">
+			<button class="white indigo_bg ">Читать</button>
+		</a>
+	</div>	
+</div>
+
+{% endfor %}
+
+</section>
+
+
+<script type="text/javascript" src='{% static "js/activate_carousel.js" %}'></script>
+
+<script>
+// Initialize Masonry after all images have loaded
+window.onload = function() {
+    var elem = document.querySelector('.tours_container');
+    var msnry = new Masonry(elem, {
+        itemSelector: '.card',
+        columnWidth: '.card', // Use the card itself as the column width
+        percentPosition: true,
+        gutter: 20 // Adjust gutter as needed
+    });
+};
+</script>
+
+
+
+{% endblock %}
