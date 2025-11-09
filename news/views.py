@@ -9,7 +9,6 @@ def news_list(request):
 
 
 def the_newsstory(request, id):
-    """Одна новость (аналог blog/the_article)."""
-    story = get_object_or_404(NewsStory, pk=id)
-    context = {'story': story}
+    the_newsstory = get_object_or_404(NewsStory, pk=id)
+    context = {'the_newsstory': the_newsstory}
     return render(request, 'news/the_newsstory.html', context)

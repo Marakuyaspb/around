@@ -36,11 +36,27 @@ class Country(models.Model):
 
 
 
+class Region(models.Model):
+	region_id = models.AutoField(primary_key=True)
+	country = models.ForeignKey(Country,
+		on_delete=models.CASCADE, verbose_name = 'Страна')
+	region = models.CharField(max_length=60, verbose_name='Регион', default='Камчатка')
+	class Meta:
+		ordering = ['region']
+		indexes = [
+			models.Index(fields=['region']),
+		]
+		verbose_name = 'Регион'
+		verbose_name_plural = 'Регионы'	
+
+	def __str__(self):
+		return self.region
+
 
 class Place_name(models.Model):
 	place_name_id = models.AutoField(primary_key=True)
-	country = models.ForeignKey(Country,
-		on_delete=models.CASCADE, verbose_name = 'Страна')
+	region = models.ForeignKey(Region,
+		on_delete=models.CASCADE, verbose_name = 'Регион')
 	place_name = models.CharField(max_length=60, verbose_name='Название места')
 	class Meta:
 		ordering = ['place_name']
@@ -53,6 +69,9 @@ class Place_name(models.Model):
 	def __str__(self):
 		return self.place_name
 
+	@property
+	def country(self):
+		return self.region.country
 
 
 
@@ -114,6 +133,10 @@ class Article(models.Model):
 	@property
 	def country(self):
 		return self.place_name.country
+
+	@property
+	def region(self):
+		return self.place_name.region
 
 
 	def __str__(self):

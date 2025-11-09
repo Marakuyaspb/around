@@ -13,6 +13,11 @@ class CountryAdmin(admin.ModelAdmin):
 	list_display = ['country_id', 'country']
 	list_filter = ['country']
 
+@admin.register(Region)
+class RegionAdmin(admin.ModelAdmin):
+	list_display = ['region_id', 'region']
+	list_filter = ['region']
+
 @admin.register(Place_name)
 class Place_nameAdmin(admin.ModelAdmin):
 	list_display = ['place_name_id', 'place_name']

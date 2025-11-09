@@ -105,12 +105,12 @@
 				</div>
 			</div>
 
-			<div class='col-md-3 lavender_bg'>
+			<div class='col-md-3 orange_bg'>
 
 				<div class='big_fields_text p-2'>
 					<h4 class='my-5'>Другие статьи</h4>
 					{% for the_article in articles %}
-						<a clas='black_text' href="{% url 'blog:the_article' id=the_article.article_id %}"><p class='we_500 black_text'>{{ the_article.title }}</p></a>
+						<a href="{% url 'blog:the_article' id=the_article.article_id %}"><p class='black'>{{ the_article.title }}</p></a>
 					{% endfor%}
 				</div>
 				
@@ -173,12 +173,12 @@
 			</div>
 		</div>
 
-		<div class='lavender_bg'>
+		<div class='orange_bg'>
 
 			<div class='big_fields_text p-2'>
 				<h4 class='my-5'>Другие статьи</h4>
 				{% for the_article in articles %}
-					<a clas='black_text' href="{% url 'blog:the_article' id=the_article.article_id %}"><p class='we_500 black_text'>{{ the_article.title }}</p></a>
+					<a clas='black_text' href="{% url 'blog:the_article' id=the_article.article_id %}"><p class='we_500 black'>{{ the_article.title }}</p></a>
 				{% endfor%}
 			</div>
 		</div>	
