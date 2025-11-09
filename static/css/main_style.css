@@ -37,6 +37,9 @@ h1, h2, h3, h4, h5 {
   font-style: normal;
 }
 
+.navbar { 
+	z-index:999
+}
 
 .tenor{
   font-family: "Tenor Sans", sans-serif;

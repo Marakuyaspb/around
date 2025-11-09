@@ -28,18 +28,37 @@
 
 <header>
 
-
-  <!-- DESCTOP -->
-  <div class='d-none d-lg-block d-xl-block d-xxl-block'>
-
+<nav class="navbar navbar-expand-lg navbar-light px-2">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'main:index' %}"><h3>Вокруг столиц</h3></a>
     
-  </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <!-- PHONE & TABLET -->
-  <div class='d-block d-lg-none '>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'blog:blog' %}">Куда поедем?</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'main:about' %}">О проекте</a>
+        </li>
+      </ul>
 
-    
+      <form class="d-flex" method="get" action="{% url 'blog:search' %}">
+        <input class="form-control me-2" 
+          type="search" 
+          name="q" 
+          placeholder="Что найти?" 
+          aria-label="Search" 
+          value="{{ request.GET.q }}">
+        <button class="button seagreen_bg" type="submit">Поиск</button>
+      </form>
+
+    </div>
   </div>
+</nav>
 
 
 </header>

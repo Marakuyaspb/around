@@ -1,0 +1,41 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+<div class='big_fields_text'>
+
+  <h3 class="pt-5 indigo">Результаты поиска{% if query %} для «{{ query }}»{% endif %}</h3>
+
+  <p class="pt-2">Найдено совпадений: {{ count }}</p>
+
+ {% for article in page_obj %}
+      <article>
+        <h4><a href="{% url 'the_article' article.article_id %}">
+            {{ article.title }}</a></h4>
+        <small>{{ article.created_at|date:"d.m.Y" }} / {{ article.category }}</small>
+        <p >{{ article.text|truncatewords:30 }}</p>
+      </article>
+  {% empty %}
+
+    <h1 class="pt-5 pb-2 indigo">К сожалению, ничего подходящего<br> найти не удалось :(</h1>
+
+    <p class="">Попробуйте сформулировать запрос другими словами
+
+      <form class="d-flex my-5 p-5" method="get" action="{% url 'blog:search' %}">
+      <input class="form-control me-2" 
+        type="search" 
+        name="q" 
+        placeholder="Поиск" 
+        aria-label="Search" 
+        value="{{ request.GET.q }}">
+      <button class="button seagreen_bg" type="submit">Поиск</button>
+      </form>
+
+  {% endfor %}
+
+  {% if page_obj.has_other_pages %}
+    {% include "_pagination.html" %}
+  {% endif %}
+  
+</div>
+
+{% endblock %}

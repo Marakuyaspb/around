@@ -10,9 +10,18 @@ def error_404_view(request, exception):
 def custom_500_view(request):
     return render(request, 'main/500.html', status=500)
 
+
 def index(request):
     articles = Article.objects.all()
     context = {
         'articles' : articles,
-    }
+    } 
     return render(request, 'main/index.html', context)
+
+
+def about(request):
+    articles = Article.objects.all()
+    context = {
+        'articles' : articles,
+    }  
+    return render(request, 'main/about.html', context)

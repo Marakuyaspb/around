@@ -8,4 +8,5 @@ app_name = 'blog'
 urlpatterns = [
     path('blog/', views.articles, name = 'blog'),
     path('blog/<int:id>/', views.the_article, name='the_article'),
+    path('search/', views.search, name='search'),
 ]
