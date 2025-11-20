@@ -4,16 +4,160 @@
 
 {% block content %}
 
+<style>
+	.section_news {
+  padding-block: min(20vh, 2rem);
+  width: calc(min(76.5rem, 90%));
+  margin-inline: auto;
+  color: #111;
+
+  h2 {
+    text-transform: capitalize;
+    letter-spacing: 0.025em;
+    font-size: clamp(2rem, 1.8125rem + 0.75vw, 2.6rem);
+  }
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .container_news {
+    margin-top: 5em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2rem;
+
+    .card_news {
+      &:nth-child(1) .box .icon .iconBox {
+        background: #d3b19a;
+      }
+      &:nth-child(2) .box .icon .iconBox {
+        background: #70b3b1;
+      }
+      &:nth-child(3) .box .icon .iconBox {
+        background: #d05fa2;
+      }
+
+    }
+
+      .content {
+        padding: 0.938rem 0.625rem;
+
+      }
+    }
+
+    .card-inner {
+      position: relative;
+      width: inherit;
+      height: 18.75rem;
+      background: var(--clr);
+      border-radius: 1.25rem;
+      border-bottom-right-radius: 0;
+      overflow: hidden;
+
+      .box {
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        border-radius: 1.25rem;
+        overflow: hidden;
+
+        .imgBox {
+          position: absolute;
+          inset: 0;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .icon {
+          position: absolute;
+          bottom: -0.375rem;
+          right: -0.375rem;
+          width: 6rem;
+          height: 6rem;
+          background: var(--clr);
+          border-top-left-radius: 50%;
+
+          &:hover .iconBox {
+            transform: scale(1.1);
+          }
+
+          &::before {
+            position: absolute;
+            content: "";
+            bottom: 0.375rem;
+            left: -1.25rem;
+            background: transparent;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-bottom-right-radius: 1.25rem;
+            box-shadow: 0.313rem 0.313rem 0 0.313rem #fff;
+          }
+
+          &::after {
+            position: absolute;
+            content: "";
+            top: -1.25rem;
+            right: 0.375rem;
+            background: transparent;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-bottom-right-radius: 1.25rem;
+            box-shadow: 0.313rem 0.313rem 0 0.313rem var(--clr);
+          }
+
+          .iconBox {
+            position: absolute;
+            inset: 0.625rem;
+            background: #282828;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+
+            span {
+              color: #fff;
+              font-size: 1.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>
+
+
+
 <div class='big_fields_text'>
-	<section class="grid-box">
-		
+
+	<section class="section_news">
+
 	{% for the_newsstory in news_list %}
+	<div class="container_news">
+		<div class="card_news">
+			<div class="card-inner" style="--clr:#fff;">
+			<div class="box">
+			<div class="imgBox">
+			<img src="{{the_newsstory.img.url}}" alt="Фото: {{ the_newsstory.title }}">
+			</div>
+			<div class="icon">
 
-	<div>
-		<img class="" src="{{the_newsstory.img.url}}">
 
-		<div class=" px-4">
-			<h2 class="indigo pt-4 pb-2">{{ the_newsstory.title }}</h2>
+			<a href="{% url 'news:the_newsstory' id=the_newsstory.newsstory_id %}" class="iconBox"> <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 19L19 7M19 7V16M19 7H10" stroke="#ffffff" stroke-width="2" stroke-linecap="round"stroke-linejoin="round"/> </svg></a>
+
+			</div>
+			</div>
+			</div>
+
+			<div class="content">
+			<h3>{{ the_newsstory.title }}</h3>
 			<p class="card-text my-3">{{ the_newsstory.first_two_sentences }}..</p>
 			<p class="pt-1 pb-3 indigo small"><b>Теги: </b>
 				{% for tag in the_newsstory.tags.all %}
@@ -23,15 +167,15 @@
 				{% endfor %}
 			</p>
 
-			<a href="{% url 'news:the_newsstory' id=the_newsstory.newsstory_id %}">
-				<button class="white indigo_bg ">Читать</button>
-			</a>
-		</div>	
+		</div>
 	</div>
 
-	{% endfor %}
+	</div>
+
+	 {% endfor %}
 
 	</section>
+
 </div>
 
 <script type="text/javascript" src='{% static "js/activate_carousel.js" %}'></script>
