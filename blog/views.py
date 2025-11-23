@@ -1,6 +1,9 @@
 import os
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.utils.text import slugify
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from .models import *
 
@@ -8,26 +11,67 @@ from .models import *
 
 
 def articles(request):
-	articles = Article.objects.all
+	articles = Article.objects.all()
+	categories = Category.objects.all()
+
 	context = {
 		'articles':articles,
+		'categories':categories,
+	}
+	return render(request, 'blog/articles.html', context)
+
+
+def by_category(request, category_slug):
+	category = get_object_or_404(Category, slug=category_slug)
+	context = {
+		'articles': category.article_set.all(),
+		'categories': Category.objects.all(),
+		'current_category': category
 	}
 	return render(request, 'blog/articles.html', context)
 
 
 
 
-def the_article(request, id=None):
-	if id:
-		the_article = get_object_or_404(Article, article_id=id)
+def _reverse_slug(model, field: str, slug: str):
+	for obj in model.objects.all():
+		if slugify(getattr(obj, field)) == slug:
+			return getattr(obj, field)
+	return None 
 
-	articles = Article.objects.all
 
+
+
+
+def by_country(request, country_slug):
+	country = get_object_or_404(Country, slug=country_slug)
 	context = {
-		'the_article':the_article,
-		'articles':articles,
-	}
-	return render(request, 'blog/the_article.html', context)
+		'articles': Article.objects.filter(place_name__region__country=country),
+		'categories': Category.objects.all(), 
+		'current_country': country}
+	return render(request, 'blog/articles.html', context)
+
+
+
+def by_region(request, country_slug, region_slug):
+	region = get_object_or_404(Region, 
+		slug=region_slug,
+		country__slug=country_slug)
+	context = {'articles': Article.objects.filter(place_name__region=region), 'categories': Category.objects.all(), 'current_region': region}
+	return render(request, 'blog/articles.html', context)
+
+
+
+
+
+def the_article(request, country_slug, region_slug, slug):
+	article = get_object_or_404(Article,
+		slug=slug,
+		place_name__region__slug=region_slug,
+		place_name__region__country__slug=country_slug)
+	return render(request, 'blog/the_article.html', {'article': article})
+
+
 
 
 

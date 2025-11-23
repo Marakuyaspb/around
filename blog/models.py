@@ -1,11 +1,21 @@
 import os
 from django.db import models
 from django.conf import settings
+from markdownfield.models import MarkdownField, RenderedMarkdownField
+from django.utils.text import slugify
+
 
 
 class Category(models.Model):
 	category_id = models.AutoField(primary_key=True)
 	category = models.CharField(max_length=60, verbose_name='Категория')
+	slug = models.SlugField(max_length=60, unique=True, blank=True)
+
+	def save(self, *args, **kwargs):
+		if not self.slug:
+			self.slug = slugify(self.category)
+		super().save(*args, **kwargs)
+
 	class Meta:
 		ordering = ['category']
 		indexes = [
@@ -23,6 +33,13 @@ class Category(models.Model):
 class Country(models.Model):
 	country_id = models.AutoField(primary_key=True)
 	country = models.CharField(max_length=60, verbose_name='Страна')
+	slug = models.SlugField(max_length=60, unique=True, blank=True)
+
+	def save(self, *args, **kwargs):
+		if not self.slug.slug:
+			self.slug = slugify(self.country)
+		super().save(*args, **kwargs)
+
 	class Meta:
 		ordering = ['country']
 		indexes = [
@@ -41,6 +58,14 @@ class Region(models.Model):
 	country = models.ForeignKey(Country,
 		on_delete=models.CASCADE, verbose_name = 'Страна')
 	region = models.CharField(max_length=60, verbose_name='Регион', default='Камчатка')
+	slug = models.SlugField(max_length=60, unique=True, blank=True)
+
+	def save(self, *args, **kwargs):
+		if not self.slug.slug:
+			self.slug = slugify(self.region)
+		super().save(*args, **kwargs)
+
+
 	class Meta:
 		ordering = ['region']
 		indexes = [
@@ -57,7 +82,9 @@ class Place_name(models.Model):
 	place_name_id = models.AutoField(primary_key=True)
 	region = models.ForeignKey(Region,
 		on_delete=models.CASCADE, verbose_name = 'Регион')
-	place_name = models.CharField(max_length=60, verbose_name='Название места')
+	place_name = models.CharField(max_length=60, verbose_name='Название места', null=True, blank=True)
+	place_name_source = models.CharField(max_length=60, verbose_name = 'Название места на языке страны', null=True, blank=True)
+
 	class Meta:
 		ordering = ['place_name']
 		indexes = [
@@ -98,10 +125,13 @@ class Article(models.Model):
 	article_id = models.AutoField(primary_key=True)
 	category = models.ForeignKey(Category,
 		on_delete=models.CASCADE, verbose_name = 'Категория')
-	place_name = models.ForeignKey(Place_name,
-		on_delete=models.CASCADE, verbose_name = 'Название места')
+	place_name = models.ForeignKey(Place_name, on_delete=models.CASCADE, verbose_name = 'Название места')
 	title = models.CharField(verbose_name ='Заголовок', max_length=200)
-	text = models.TextField(verbose_name ='Текст статьи')
+	slug = models.SlugField(max_length=200, unique=True, blank=True, default='my-slug')
+
+	text = MarkdownField(rendered_field='text_html', verbose_name ='Текст статьи', null=True, blank=True)
+	text_html = RenderedMarkdownField(null=True, blank=True)
+
 	img_prev = models.ImageField(upload_to='imgs/', null=True, blank=True, verbose_name = 'Фото в шапку страницы')
 
 	img_1 = models.ImageField(upload_to='imgs/', null=True, blank=True, verbose_name = 'Иллюстрация 1')
@@ -131,16 +161,39 @@ class Article(models.Model):
 
 
 	@property
+	def place_name_source(self):
+		return self.place_name.place_name_source
+
+	@property
+	def country_slug(self):
+		return self.place_name.region.country.slug
+
+	@property
+	def region_slug(self):
+		return self.place_name.region.slug
+
+	@property
+	def category_slug(self):
+		return self.category.slug
+
+
+	@property
 	def country(self):
-		return self.place_name.country
+		return self.place_name.country.country
 
 	@property
 	def region(self):
-		return self.place_name.region
+		return self.place_name.region.region
 
 
 	def __str__(self):
 		return f'Статья "{self.title}"'
+
+
+	def save(self, *args, **kwargs):
+		if not self.slug:
+			self.slug = slugify(self.title)
+		super().save(*args, **kwargs)
 
 
 	def latest_3_articles(request):

@@ -27,11 +27,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
+    'markdownfield',
     'blog',
     'main',
     'news'
 ]
+
+MARKDOWN_LINKIFY_BLACKLIST = []
+MARKDOWN_LINKIFY_SKIP_TAGS = ['pre', 'code']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

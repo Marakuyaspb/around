@@ -4,9 +4,32 @@
 
 {% block content %}
 
-
+<a href="{% url 'blog:the_country'">
 
 <div class='full_width'>
+
+	<section id="breadcrumbs">
+		<p class="smaller">
+			<span>Главная </span> / 
+			{% if the_article.country %}
+				<a href="{% url 'blog:the_country' the_article.country|slugify %}">
+					<span>{{ the_article.country }}</span>
+				</a> / 
+				{% else %}
+				 <span>—</span> /
+    		{% endif %}
+    		{% if the_article.region %}
+				<a href="{% url 'blog:the_region' the_article.region|slugify %}">
+					<span>{{ the_article.region }}</span>
+				</a> /
+			{% else %}
+	      		 <span>—</span> /
+	    	{% endif %}
+	    	
+			<span>{{ the_article.place_name|default:"—" }}</span>
+		</p>
+	</section>
+
 
 <!-- Desctop -->
 	<div class='d-none d-lg-block d-xl-block d-xxl-block'>
@@ -169,7 +192,7 @@
 			<div class="px-5 mt-5 mb-52">
 				<h2 class='indigo'>{{ the_article.title }}</h2>
 				<p class='pt-2 pb-3 we_500'></p>
-				<p>{{ the_article.text|linebreaks }}</p>
+				<p>{{ the_article.text_html|safe }}</p>
 			</div>
 		</div>
 

@@ -7,16 +7,22 @@ from .models import *
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ['category_id', 'category']
 	list_filter = ['category']
+	readonly_fields = ('slug',)
+	
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
 	list_display = ['country_id', 'country']
 	list_filter = ['country']
+	readonly_fields = ('slug',)
+
 
 @admin.register(Region)
 class RegionAdmin(admin.ModelAdmin):
 	list_display = ['region_id', 'region']
 	list_filter = ['region']
+	readonly_fields = ('slug',)
+
 
 @admin.register(Place_name)
 class Place_nameAdmin(admin.ModelAdmin):
@@ -34,3 +40,4 @@ class TagAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
 	list_display = ['article_id', 'category', 'place_name', 'title']
 	list_filter = ['title']
+	readonly_fields = ('slug',)
