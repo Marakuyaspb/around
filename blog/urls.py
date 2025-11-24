@@ -7,7 +7,9 @@ app_name = 'blog'
 
 urlpatterns = [
     path('blog/', views.articles, name = 'blog'),
-
+    # single article
+    path('blog/<slug:slug>/',views.the_article, name='the_article'),
+    
     path('search/', views.search, name='search'),
 
 
@@ -20,6 +22,5 @@ urlpatterns = [
     # all articles in one region
     path('blog/<slug:country_slug>/<slug:region_slug>/', views.by_region, name='by_region'),
 
-    # single article
-    path('blog/<slug:country_slug>/<slug:region_slug>/<slug:slug>/',views.the_article, name='the_article'),
+
 ]

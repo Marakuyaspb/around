@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class='full_width'>
+	<div class='row'>
+
+		<div class='col-md-4 mb-2'>
+			<h1 class='ps-4'>{{region.region}}: что посмотреть</h1>
+
+			<section class="grid-box">
+				
+			{% include 'blog/article_list.html' %}
+
+			</section>
+
+		</div>
+		<div class='col-md-5 mb-2'>
+			<h2>Другие страны</h2>
+
+			{% for c in countries %}
+				<a href="{% url 'blog:by_country' id=с.country_id %}"><p class='black'>{{ с.country }}</p></a>
+			{% empty %}
+				Не добавили пока
+			{% endfor %}
+
+		</div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript" src='{% static "js/activate_carousel.js" %}'></script>
+
+<script>
+// Initialize Masonry after all images have loaded
+window.onload = function() {
+    var elem = document.querySelector('.tours_container');
+    var msnry = new Masonry(elem, {
+        itemSelector: '.card',
+        columnWidth: '.card', // Use the card itself as the column width
+        percentPosition: true,
+        gutter: 20 // Adjust gutter as needed
+    });
+};
+</script>
+
+
+
+{% endblock %}

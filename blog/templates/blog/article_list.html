@@ -4,10 +4,7 @@
 {% for the_article in articles %}
 
 <div>
-	<a href="{% url 'blog:the_article'
-      		country_slug=the_article.country_slug
-            region_slug=the_article.region_slug
-            slug=the_article.slug %}">
+	<a href="{% url 'blog:the_article' slug=the_article.slug %}">
 		<div class="geometry_card tl_radius relative m-3">
 			<img class="img_bg_card" src="{{the_article.img_prev.url}}">
 
@@ -28,10 +25,7 @@
 
 	<div class="prev_text px-4">
 		<h5 class="black pb-2">{{ the_article.title }}</h5>
-		<a href="{% url 'blog:the_article'
-		country=the_article.country|slugify
-	    region=the_article.region|slugify
-	    slug=the_article.slug %}"><button class="seagreen black_bg ">Читать</button></a>
+		<a href="{% url 'blog:the_article' slug=the_article.slug %}"><button class="seagreen black_bg ">Читать</button></a>
 	</div>	
 </div>
 

@@ -43,33 +43,69 @@ def _reverse_slug(model, field: str, slug: str):
 
 
 
-def by_country(request, country_slug):
+def by_country(request, country_slug: str):
 	country = get_object_or_404(Country, slug=country_slug)
-	context = {
-		'articles': Article.objects.filter(place_name__region__country=country),
-		'categories': Category.objects.all(), 
-		'current_country': country}
-	return render(request, 'blog/articles.html', context)
+
+	# статьи, относящиеся к этой стране
+	articles = Article.objects.filter(country=country).select_related('region')
+
+	# список всех стран (кроме текущей, чтобы не показывать её повторно)
+	countries = Country.objects.exclude(country_id=country.country_id)
+
+	return render(request, 'blog/articles_by_country.html', {
+		'country': country.country,
+		'articles': articles,
+		'regions': Region.objects.filter(country=country),
+		'countries': countries,
+	})
+
+
+def by_region(request, country_slug: str, region_slug: str):
+	country = get_object_or_404(Country, slug=country_slug)
+	region  = get_object_or_404(Region, country=country, slug=region_slug)
+
+	# статьи конкретного региона
+	articles = Article.objects.filter(region=region)
+
+	# список всех стран (кроме страны, к которой относится этот регион)
+	countries = Country.objects.exclude(country_id=country.country_id)
+
+	return render(request, 'blog/articles_by_region.html', {
+		'region': region,
+		'articles': articles,
+		'countries': countries,
+	})
 
 
 
-def by_region(request, country_slug, region_slug):
-	region = get_object_or_404(Region, 
-		slug=region_slug,
-		country__slug=country_slug)
-	context = {'articles': Article.objects.filter(place_name__region=region), 'categories': Category.objects.all(), 'current_region': region}
-	return render(request, 'blog/articles.html', context)
 
+def the_article(request, slug: str):
+	article = get_object_or_404(
+	Article.objects
+	.select_related(
+		'category',                 # Category
+		'place_name',               # Place_name
+		'place_name__region',       # Region
+		'place_name__region__country',  # Country
+	),
+	slug=slug
+    )
 
+	# готовые строки для шаблона (не дергаем property в цикле)
+	country_slug = article.place_name.region.country.slug
+	region_slug  = article.place_name.region.slug
+	category_slug = article.category.slug
 
-
-
-def the_article(request, country_slug, region_slug, slug):
-	article = get_object_or_404(Article,
-		slug=slug,
-		place_name__region__slug=region_slug,
-		place_name__region__country__slug=country_slug)
-	return render(request, 'blog/the_article.html', {'article': article})
+	return render(
+		request,
+		'blog/the_article.html',
+		{
+			'article': article,
+			'country_slug': country_slug,
+			'region_slug': region_slug,
+			'category_slug': category_slug,
+		}
+	)
 
 
 
@@ -78,24 +114,6 @@ def the_article(request, country_slug, region_slug, slug):
 def search(request):
 	q = request.GET.get('q', '').strip()
 	if q:
-	# something was typed
-		# Postgres fast full-text (GIN index friendly)
-		# articles = (
-		# 	Article.objects
-		# 	.annotate(
-		# 		search=SearchVector(
-		# 			'title',
-		# 			'text',
-		# 			'category__category',
-		# 			'place_name__place_name',
-		# 			'place_name__country__country',
-		# 			'tags__tag'
-		# 		)
-		# 	)
-		# 	.filter(search=q).distinct()
-		# )
-
-		# ----------  SQLite / MySQL fallback ----------
 		articles = Article.objects.filter(
 			Q(title__icontains=q) |
 			Q(text__icontains=q) |
