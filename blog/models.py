@@ -3,7 +3,7 @@ from django.db import models
 from django.conf import settings
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from django.utils.text import slugify
-
+from pytils.translit import slugify as translit_slug
 
 
 class Category(models.Model):
@@ -13,9 +13,17 @@ class Category(models.Model):
 
 	def save(self, *args, **kwargs):
 		if not self.slug:
-			self.slug = slugify(self.category)
+			base = translit_slug(self.category)
+			slug = base
+			counter = 1
+			while Category.objects.filter(slug=slug).exists():
+				slug = f"{base}-{counter}"
+				counter += 1
+			self.slug = slug
 		super().save(*args, **kwargs)
 
+
+		
 	class Meta:
 		ordering = ['category']
 		indexes = [
@@ -36,8 +44,14 @@ class Country(models.Model):
 	slug = models.SlugField(max_length=60, unique=True, blank=True)
 
 	def save(self, *args, **kwargs):
-		if not self.slug.slug:
-			self.slug = slugify(self.country)
+		if not self.slug:
+			base = translit_slug(self.country)
+			slug = base
+			counter = 1
+			while Country.objects.filter(slug=slug).exists():
+				slug = f"{base}-{counter}"
+				counter += 1
+			self.slug = slug
 		super().save(*args, **kwargs)
 
 	class Meta:
@@ -61,8 +75,14 @@ class Region(models.Model):
 	slug = models.SlugField(max_length=60, unique=True, blank=True)
 
 	def save(self, *args, **kwargs):
-		if not self.slug.slug:
-			self.slug = slugify(self.region)
+		if not self.slug:
+			base = translit_slug(self.region)
+			slug = base
+			counter = 1
+			while Region.objects.filter(slug=slug).exists():
+				slug = f"{base}-{counter}"
+				counter += 1
+			self.slug = slug
 		super().save(*args, **kwargs)
 
 
@@ -127,7 +147,7 @@ class Article(models.Model):
 		on_delete=models.CASCADE, verbose_name = 'Категория')
 	place_name = models.ForeignKey(Place_name, on_delete=models.CASCADE, verbose_name = 'Название места')
 	title = models.CharField(verbose_name ='Заголовок', max_length=200)
-	slug = models.SlugField(max_length=200, unique=True, blank=True, default='my-slug')
+	slug = models.SlugField(max_length=200, blank=True, unique=True, default='my-slugg')
 
 	text = MarkdownField(rendered_field='text_html', verbose_name ='Текст статьи', null=True, blank=True)
 	text_html = RenderedMarkdownField(null=True, blank=True)
@@ -144,6 +164,7 @@ class Article(models.Model):
 	img_8 = models.ImageField(upload_to='imgs/', null=True, blank=True, verbose_name = 'Иллюстрация 8')
 	img_9 = models.ImageField(upload_to='imgs/', null=True, blank=True, verbose_name = 'Иллюстрация 9')
 	img_10 = models.ImageField(upload_to='imgs/', null=True, blank=True, verbose_name = 'Иллюстрация 10')
+	source = models.CharField(max_length=50, default='wikitravel')
 
 	tags = models.ManyToManyField(Tag, related_name='articles', blank=True)
 
@@ -192,13 +213,19 @@ class Article(models.Model):
 
 	def save(self, *args, **kwargs):
 		if not self.slug:
-			self.slug = slugify(self.title)
+			base = translit_slug(self.title)
+			slug = base
+			counter = 1
+			while Article.objects.filter(slug=slug).exists():
+				slug = f"{base}-{counter}"
+				counter += 1
+			self.slug = slug
 		super().save(*args, **kwargs)
 
 
 	def latest_3_articles(request):
 		latest_articles = Article.objects.order_by('-updated_at')[:3]
-		return render(request, 'latest_articles.html', {'_articles': _articles})
+		return render(request, 'latest_articles.html', {'latest_articles': latest_articles})
 
 	def latest_10_articles(request):
 		latest_articles = Article.objects.order_by('-updated_at')[:10]
