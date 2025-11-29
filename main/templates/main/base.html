@@ -42,14 +42,14 @@
           <a class="nav-link" aria-current="page" href="{% url 'blog:blog' %}">Куда поедем?</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="{% url 'news:news' %}">Новости</a>
+          <a class="nav-link" aria-current="page" href="{% url 'news:news' %}">Новости со всего мира</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'main:about' %}">О проекте</a>
         </li>
       </ul>
 
-      <form class="d-flex" method="get" action="{% url 'blog:search' %}">
+      <form class="d-flex pb-5" method="get" action="{% url 'blog:search' %}">
         <input class="form-control me-2" 
           type="search" 
           name="q" 

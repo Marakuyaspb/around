@@ -4,19 +4,49 @@
 
 {% block content %}
 
-<h3 class='ps-4'>Выберите категорию</h3>
-<section class='d-flex flex-row ps-4'>
-	<button class="mx-1 active"
-          data-slug="all">Все</button>
-	{% for cat in categories %}
-	<button class="mx-1" data-slug="{{ cat.slug }}" type="submit" name='{{cat.category}}'>{{ cat.category }}</button>
-	{% empty %}
-		<p class='small'>Нет пока категорий</p>
-	{% endfor %}
-</section>
+<div class="ps-4 py-4 white_warm_bg">
+
+<h1 class='pb-3 indigo'>Интересные места</h1>
+
+<!-- DESCTOP -->
+	<div class='d-none d-lg-block d-xl-block d-xxl-block'>
+		<strong class=''>Выберите категорию:</strong>
+		<section class='d-flex flex-row'>
+			<div class="">
+				<button class="m-1 active red_bg small" data-slug="all">Все</button>
+			</div>
+			{% for cat in categories %}
+			<div class="">
+				<button class="m-1 lavender_bg small" data-slug="{{ cat.slug }}" type="submit" name='{{cat.category}}'>{{ cat.category }}</button>
+			</div>
+			{% empty %}
+				<p class='small'>Нет пока категорий</p>
+			{% endfor %}
+		</section>
+	</div>
+
+<!-- PHONE -->
+	<div class='d-block d-lg-none'>
+		<strong class=''>Выберите категорию:</strong>
+
+		<section class='row ps-4'>
+			<div class="col">
+				<button class="m-1  active red_bg small" data-slug="all">Все</button>
+			</div>
+			{% for cat in categories %}
+			<div class="col">
+				<button class="m-1 lavender_bg small" data-slug="{{ cat.slug }}" type="submit" name='{{cat.category}}'>{{ cat.category }}</button>
+			</div>
+			{% empty %}
+				<p class='small'>Нет пока категорий</p>
+			{% endfor %}
+		</section>
+	</div>
+
+</div>
 
 
-<section class="grid-box">
+<section class="grid-box black_bg">
 	
 {% include 'blog/article_list.html' %}
 

@@ -186,6 +186,13 @@ p {
 		margin-left: auto;
 		margin-right: auto;
 	}
+
+	.big_fields_text_50{
+		width: 50%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
 	.wrap_cover{
 		position: relative;
 		height: 800px;
@@ -319,6 +326,7 @@ p {
 	width: 20em;
 	height: 20em;
 	overflow: hidden; 
+	z-index: 555;
 }
 .img_bg_card{
 	position: absolute;
@@ -335,9 +343,9 @@ p {
 	width: 10.3em;
 	display: flex;
 	align-items: center;
-	border-top: 5px solid var(--white);
-	border-right: 5px solid var(--white);
-	border-bottom: 5px solid var(--white);
+	border-top: 5px solid var(--black);
+	border-right: 5px solid var(--black);
+	border-bottom: 5px solid var(--black);
 }
 .anti_circle{
 	top: 0;
@@ -350,7 +358,7 @@ p {
       radial-gradient(ellipse 5em 5em at 50% calc(100% - 1em), transparent 100%, #000 0);
       splay: flex;
 	align-items: flex-start;
-	border-left: 5px solid var(--white);
+	border-left: 5px solid var(--black);
 }
 .circle{
 	bottom: 0;
@@ -359,7 +367,7 @@ p {
   	width: 10em;
   	height: 10em;
   	border-radius: 10em;
-	border: 5px solid var(--white);
+	border: 5px solid var(--black);
 	background: transparent;
 }
 
