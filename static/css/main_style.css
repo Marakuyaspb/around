@@ -3,18 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
 
 :root{
-  --black_absolute:rgb(0,0,0);
-  --black: rgb(29, 28, 28);
-  --gray_light: rgb(217, 217, 217);
-  --gray: rgb(119, 118, 118);
-  --indigo: rgb(58, 59, 115);
-  --lavender: rgb(223, 192, 190);
-  --orange: rgb(255, 200, 109);
-  --red: rgb(244, 88, 101);
-  --seagreen: rgb(151, 209, 195);
-  --white: rgb(255, 255, 255);
-  --white_warm: rgb(255, 245, 233);
-  --white_dirty: rgb(245, 245, 245);
+  --black_absolute:rgb(0,0,0);       /*  #000000  */
+  --black: rgb(29, 28, 28);          /*  #1d1c1c  */
+  --gray_light: rgb(217, 217, 217);  /*  #d9d9d9  */
+  --gray: rgb(119, 118, 118);        /*  #777676  */
+  --indigo: rgb(58, 59, 115);        /*  #3a3b73  */
+  --lavender: rgb(223, 192, 190);    /*  #dfc0be  */
+  --orange: rgb(255, 200, 109);      /*  #ffc86d  */
+  --red: rgb(244, 88, 101);          /*  #f45865  */
+  --seagreen: rgb(151, 209, 195);    /*  #97d1c3  */
+  --white: rgb(255, 255, 255);       /*  #ffffff  */
+  --white_warm: rgb(255, 245, 233);  /*  #fff5e9  */
+  --white_dirty: rgb(245, 245, 245); /*  #f5f5f5  */
 }
 
 html{
