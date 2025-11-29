@@ -310,9 +310,9 @@ p {
 
 .grid-box {
   display: grid;
-  gap: 1.5rem;          /* space between cards */
+  gap: 0.7rem;          /* space between cards */
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
-  padding: 1.5rem;      /* optional page padding */
+  padding: 0.7rem;      /* optional page padding */
 }
 
 

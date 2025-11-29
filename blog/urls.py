@@ -22,5 +22,4 @@ urlpatterns = [
     # all articles in one region
     path('blog/<slug:country_slug>/<slug:region_slug>/', views.by_region, name='by_region'),
 
-
 ]
